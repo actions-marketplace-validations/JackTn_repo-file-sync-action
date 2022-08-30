@@ -1,3 +1,6 @@
+
+### This GitHub Action is only for test. When github create tree return 502 because of the github tree is large to run in one step.
+
 <div align="center">
   
 # Repo File Sync Action
