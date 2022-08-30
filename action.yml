@@ -1,6 +1,6 @@
-name: 'Repo File Sync Action'
+name: 'Repo File Sync Action For Large GitHub Tree'
 description: 'GitHub Action to Sync Files like Workflows Between Repositories.'
-author: 'BetaHuhn'
+author: 'JackTn'
 
 inputs:
   GH_PAT:
