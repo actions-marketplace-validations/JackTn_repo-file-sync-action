@@ -372,7 +372,7 @@ class Git {
 				this.workingDir
 			)
 		}
-		if (IS_INSTALLATION_TOKEN) {
+		if (false) {
 			return await this.createGithubVerifiedCommits()
 		}
 		return execCmd(
