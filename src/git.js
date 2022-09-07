@@ -372,7 +372,7 @@ class Git {
 				this.workingDir
 			)
 		}
-		if (false) {
+		if (IS_INSTALLATION_TOKEN) {
 			return await this.createGithubVerifiedCommits()
 		}
 		return execCmd(
@@ -495,15 +495,41 @@ class Git {
 		})
 	}
 
+	group(array, subGroupLength) {
+		let index = 0
+		const newArray = []
+
+		while (index < array.length) {
+			newArray.push(array.slice(index, (index += subGroupLength)))
+		}
+
+		return newArray
+	}
+
+	async createTreeAll(owner, repo, totalTree, ChunkLimit = 500) {
+		const groupTrees = this.group(totalTree, ChunkLimit)
+		let tmpTree
+		let tmpTreeSha
+
+		for (const tree of groupTrees) {
+			tmpTree = await this.github.git.createTree({
+				owner,
+				repo,
+				tree: tree,
+				base_tree: tmpTreeSha
+			})
+
+			tmpTreeSha = tmpTree.data.sha
+		}
+
+		return tmpTree
+	}
+
 	async createGithubTreeAndCommit(tree, commitMessage) {
 		core.debug(`Creating a GitHub tree`)
 		let treeSha
 		try {
-			const request = await this.github.git.createTree({
-				owner: this.repo.user,
-				repo: this.repo.name,
-				tree
-			})
+			const request = await this.createTreeAll(this.repo.user, this.repo.name, tree)
 			treeSha = request.data.sha
 		} catch (error) {
 			error.message = `Cannot create a new GitHub Tree: ${ error.message }`
