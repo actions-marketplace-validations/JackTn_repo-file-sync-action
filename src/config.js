@@ -53,6 +53,16 @@ try {
 			type: 'boolean',
 			default: true
 		}),
+		CREATE_TREE_LIMIT: getInput({
+			key: 'CREATE_TREE_LIMIT',
+			type: 'number',
+			default: 500
+		}),
+		COMMIT_MESSAGE: getInput({
+			key: 'COMMIT_MESSAGE',
+			type: 'string',
+			default: ''
+		}),
 		PR_LABELS: getInput({
 			key: 'PR_LABELS',
 			default: [ 'sync' ],

@@ -1,5 +1,7 @@
+### If you see this error when you use this github action, you can try this ~
 
-### This GitHub Action is only for test. When github create tree return 502 because of the github tree is large to run in one step.
+- Sorry, your request timed out. It's likely that your input was too large to process. Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub.
+###  When the sync repo is too big, the Github api will hard to progress. This field CREATE_TREE_LIMIT can be resolved.
 
 <div align="center">
   
@@ -113,6 +115,8 @@ Here are all the inputs [repo-file-sync-action](https://github.com/BetaHuhn/repo
 | `REVIEWERS` | Users to request a review of the pull request from | **No** | N/A |
 | `TEAM_REVIEWERS` | Teams to request a review of the pull request from | **No** | N/A |
 | `COMMIT_PREFIX` | Prefix for commit message and pull request title | **No** | 🔄 |
+| `COMMIT_MESSAGE` | Use this commit message instead of the default from commit data | **No** | '' |
+| `CREATE_TREE_LIMIT` | When create tree by large input to process, it's request will time out. This will building the tree incrementally | **No** | 500 |
 | `COMMIT_BODY` | Commit message body. Will be appended to commit message, separated by two line returns. | **No** | '' |
 | `PR_BODY` | Additional content to add in the PR description. | **No** | '' |
 | `ORIGINAL_MESSAGE` | Use original commit message instead. Only works if the file(s) were changed and the action was triggered by pushing a single commit. | **No** | false |

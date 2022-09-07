@@ -1,4 +1,4 @@
-name: 'Repo File Sync Action For Large GitHub Tree'
+name: 'Repo File Sync Action For Big GitHub Repo'
 description: 'GitHub Action to Sync Files like Workflows Between Repositories.'
 author: 'JackTn'
 
@@ -38,6 +38,14 @@ inputs:
   COMMIT_PREFIX:
     description: |
       Prefix for commit message and pull request title. Defaults to 🔄
+    required: false
+  COMMIT_MESSAGE:
+    description: |
+      Use this commit message instead of the default from commit data.  Defaults to ''
+    required: false
+  CREATE_TREE_LIMIT:
+    description: |
+      When create tree by large input to process, it's request will time out. This will building the tree incrementally
     required: false
   COMMIT_BODY:
     description: |

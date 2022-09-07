@@ -13,6 +13,8 @@ const {
 	GIT_EMAIL,
 	TMP_DIR,
 	COMMIT_BODY,
+	COMMIT_MESSAGE,
+	CREATE_TREE_LIMIT,
 	COMMIT_PREFIX,
 	GITHUB_REPOSITORY,
 	OVERWRITE_EXISTING_PR,
@@ -506,8 +508,9 @@ class Git {
 		return newArray
 	}
 
-	async createTreeAll(owner, repo, totalTree, ChunkLimit = 500) {
-		const groupTrees = this.group(totalTree, ChunkLimit)
+	async createTreeAll(owner, repo, totalTree) {
+		const createTreeLimit = CREATE_TREE_LIMIT ? CREATE_TREE_LIMIT : 500
+		const groupTrees = this.group(totalTree, createTreeLimit)
 		let tmpTree
 		let tmpTreeSha
 
@@ -540,7 +543,7 @@ class Git {
 		const request = await this.github.git.createCommit({
 			owner: this.repo.user,
 			repo: this.repo.name,
-			message: commitMessage,
+			message: COMMIT_MESSAGE ? COMMIT_MESSAGE : commitMessage,
 			parents: [ this.lastCommitSha ],
 			tree: treeSha
 		})
